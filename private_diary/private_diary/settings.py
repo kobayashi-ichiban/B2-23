@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'dairy.contrib.DairyConfig',
+    'dairy.apps.DairyConfig',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +127,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ログ設定
 LOGGING = {
     'version': 1,
-    'disable_existing_logger': False,
+    'disable_existing_loggers': False,
 
     # ロガー設定
     'loggers': {
@@ -145,7 +145,7 @@ LOGGING = {
     'handlers': {
         'console': {
             'level': 'DEBUG',
-            'class': 'Logging.StreamHandler',
+            'class': 'logging.StreamHandler',
             'formatter': 'dev',
         },
     },
@@ -153,7 +153,7 @@ LOGGING = {
     # ハンドラー設定
     'formatters': {
         'dev': {
-            'format': '/t'.join([
+            'format': '\t'.join([
                 '%(asctime)s',
                 '[%(levelname)s]',
                 '%(pathname)s(Line:%(lineno)d)',
