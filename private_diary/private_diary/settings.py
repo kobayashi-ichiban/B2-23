@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'dairy.apps.DairyConfig',
+    'diary.apps.DiaryConfig',
 ]
 
 MIDDLEWARE = [
@@ -162,3 +162,9 @@ LOGGING = {
         },
     }
 }
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+BASE_DIR = Path(__file__).resolve().parent.parent
