@@ -135,7 +135,7 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'INFO',
         },
-        'dairy': {
+        'diary': {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
