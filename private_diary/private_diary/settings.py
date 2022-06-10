@@ -163,8 +163,8 @@ LOGGING = {
     }
 }
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
-BASE_DIR = Path(__file__).resolve().parent.parent
