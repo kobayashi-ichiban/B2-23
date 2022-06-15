@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'diary.apps.DiaryConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -162,3 +163,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
