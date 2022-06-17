@@ -21,21 +21,6 @@
     <link href="{% static 'css/mystyle.css' %}" rel="stylesheet" type="text/css" />
     {% block head %}{% endblock %}
 
-    {% if messages %}
-        <div class="container my-div-style">
-            <div class="row">
-                <ul class="meessages" style="list-style: none;">
-                    {% for message in messages %}
-                        <li {% if message.tags %} class="{{ message.tag }}" {% endif %}>
-                            {{ message }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    {% endif %}
-
-    {% block contents %}{% endblock %}
 </head>
 <body>
     <div id="wrapper">
@@ -66,6 +51,21 @@
             </div>
         </nav>
         {% block header %}{% endblock %}
+
+        {% if messages %}
+            <div class="container my-div-style">
+                <div class="row">
+                    <ul class="messages" style="list-style: none;">
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tag }}" {% endif %}>
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+
         {% block contents %}{% endblock %}
         <!-- footer -->
         <footer class="py-5 bg-black">
