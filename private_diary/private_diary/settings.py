@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'django_bootstrap5',
+    "django_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -82,8 +82,10 @@ WSGI_APPLICATION = 'private_diary.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_USER'),
-        'USER': os.environ.get('DB_PASSWORD'),
+        #'NAME': os.environ.get('DB_USER'),
+        #'USER': os.environ.get('DB_PASSWORD'),
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': '',
         'POST': '',
