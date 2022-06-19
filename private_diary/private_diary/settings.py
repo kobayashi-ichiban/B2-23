@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'private_diary.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': os.environ.get('DB_USER'),
-        #'USER': os.environ.get('DB_PASSWORD'),
-        'NAME': 'postgres',
-        'USER': 'postgres',
+        'NAME': os.environ.get('DB_USER'),
+        'USER': os.environ.get('DB_PASSWORD'),
+        #'NAME': 'postgres',
+        #'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': '',
         'POST': '',
@@ -132,6 +132,10 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
 
 # ログ設定
 LOGGING = {
