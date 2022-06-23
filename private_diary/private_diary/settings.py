@@ -208,7 +208,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
 # ログイン・ログアウト時の遷移先設定
-LOGIN_REDIRECT_URL = 'diary:index'
+# LOGIN_REDIRECT_URL = 'diary:index'
+LOGIN_REDIRECT_URL = 'diary:diary_list'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 # ログアウト時にクリック1回でログアウトする設定
