@@ -82,13 +82,14 @@ WSGI_APPLICATION = 'private_diary.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_USER'),
-        'USER': os.environ.get('DB_PASSWORD'),
+        'NAME': 'postgres',
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
         #'NAME': 'postgres',
         #'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '',
-        'POST': '',
+        #'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -220,3 +221,5 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 # デフォルトのメール送信元設定
 DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
+
+EMAIL_BACKEND   = "django.core.mail.backends.console.EmailBackend"
