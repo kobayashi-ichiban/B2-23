@@ -222,4 +222,4 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 # デフォルトのメール送信元設定
 DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 
-EMAIL_BACKEND   = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
