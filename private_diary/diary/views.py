@@ -13,15 +13,6 @@ from .models import Diary
 logger = logging.getLogger(__name__)
 
 
-class OnlyYouMixin(UserPassesTestMixin):
-    raise_exception = True
-
-    def test_func(self):
-        # URLに埋め込まれた主キーから日記データを1件取得。取得できなければ404エラー
-        diary = get_object_or_404(Diary, pk=self.kwargs['pk'])
-        return self.request.user == diary.user
-
-
 class IndexView(generic.TemplateView):
     template_name = "index.html"
 
@@ -48,10 +39,15 @@ class DiaryListView(LoginRequiredMixin, generic.ListView):
         return diaries
 
 
-class DiaryDetailView(LoginRequiredMixin, OnlyYouMixin, generic.DetailView):
+class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
     model = Diary
     template_name = 'diary_detail.html'
-    pk_url_kwarg = 'id'
+    pk_url_kwarg = 'pk'
+
+    def test_func(self):
+        # URLに埋め込まれた主キーから日記データを1件取得。取得できなければ404エラー
+        diary = get_object_or_404(Diary, pk=self.kwargs['pk'])
+        return self.request.user == diary.user
 
 
 class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
@@ -72,7 +68,7 @@ class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_invalid(form)
 
 
-class DiaryUpdateView(LoginRequiredMixin, OnlyYouMixin, generic.UpdateView):
+class DiaryUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Diary
     template_name = 'diary_update.html'
     form_class = DiaryCreateForm
@@ -88,8 +84,13 @@ class DiaryUpdateView(LoginRequiredMixin, OnlyYouMixin, generic.UpdateView):
         messages.error(self.request, "日記の更新に失敗しました。")
         return super().form_invalid(form)
 
+    def test_func(self):
+        # URLに埋め込まれた主キーから日記データを1件取得。取得できなければ404エラー
+        diary = get_object_or_404(Diary, pk=self.kwargs['pk'])
+        return self.request.user == diary.user
 
-class DiaryDeleteView(LoginRequiredMixin, OnlyYouMixin, generic.DeleteView):
+
+class DiaryDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Diary
     template_name = 'diary_delete.html'
     success_url = reverse_lazy('diary:diary_list')
@@ -97,3 +98,8 @@ class DiaryDeleteView(LoginRequiredMixin, OnlyYouMixin, generic.DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, "日記を削除しました。")
         return super().delete(request, *args, **kwargs)
+
+    def test_func(self):
+        # URLに埋め込まれた主キーから日記データを1件取得。取得できなければ404エラー
+        diary = get_object_or_404(Diary, pk=self.kwargs['pk'])
+        return self.request.user == diary.user
