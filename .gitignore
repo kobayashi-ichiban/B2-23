@@ -173,5 +173,7 @@ cython_debug/
 ProjectB2-23.iml
 .tmp/
 
+# SECRET_KEY
+!/private_diary/private_diary/get_random_secret_key.py
+!/private_diary/private_diary/local_setting.py
 # End of https://www.toptal.com/developers/gitignore/api/django!/ProjectB2-23.iml
-
