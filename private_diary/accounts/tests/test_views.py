@@ -42,3 +42,22 @@ class TestCreateDiaryView(LoggedInTestCase):
     def test_create_diary_failure(self):
         response = self.client.post(reverse_lazy('diary:diary_create'))
         self.assertFormError(response, 'form', 'title', 'このフィールドは必須です。')
+
+
+class TestUpdateDiaryView(LoggedInTestCase):
+    """DiaryUpdateViewのテスト"""
+    def test_update_diary_success(self):
+        diary = Diary.objects.create(user=self.test_user, titlle='編集前')
+
+        params = {
+            'title': 'テスト編集'
+        }
+        response = self.client.post(reverse_lazy('diary:diary_update', kwargs={'pk': diary.pk}), params)
+        self.assertRedirects(response, reverse_lazy('diary:diary_detail', kwargs={'pk': diary.pk}))
+
+        # 日記を編集したかを確認
+        self.assertEqual(Diary.objects.get(pk=diary.pk).title, 'テスト編集')
+
+    def test_update_diary_failure(self):
+        response = self.client.post(reverse_lazy('diary:diary_update', kwargs={'pk': 999}))
+        self.assertEqual(response.status_code, 404)
