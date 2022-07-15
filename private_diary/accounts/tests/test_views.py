@@ -59,5 +59,21 @@ class TestUpdateDiaryView(LoggedInTestCase):
         self.assertEqual(Diary.objects.get(pk=diary.pk).title, 'テスト編集')
 
     def test_update_diary_failure(self):
-        response = self.client.post(reverse_lazy('diary:diary_update', kwargs={'pk': 999}))
+        response = self.client.post(reverse_lazy('diary:diary_update', kwargs={'pk': -1}))
+        # 存在しないデータを編集しようとすると、エラーになることを確認
+        self.assertEqual(response.status_code, 404)
+
+
+class TestDeleteDiaryView(LoggedInTestCase):
+    """DiaryDeleteViewのテスト"""
+    def test_delete_siarry_success(self):
+        diary = Diary.objects.create(user=self.test_user, title='タイトル')
+        response = self.client.post(reverse_lazy('diary:diary_delete', kwargs={'pk', diary.pk}))
+        self.assertRedirects(response, reverse_lazy('diary:diary_list'))
+        # 日記を削除したかを確認
+        self.assertEqual(Diary.objects.filter(pk=diary.pk).count(), 0)
+
+    def test_delete_diary_failure(self):
+        response = self.client.post(reverse_lazy('diary:diary_delete', kwarg={'pk': -1}))
+        # 存在しないデータを削除しようとすると、エラーになることを確認
         self.assertEqual(response.status_code, 404)
