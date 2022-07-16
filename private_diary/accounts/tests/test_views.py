@@ -66,7 +66,7 @@ class TestUpdateDiaryView(LoggedInTestCase):
 
 class TestDeleteDiaryView(LoggedInTestCase):
     """DiaryDeleteViewのテスト"""
-    def test_delete_siarry_success(self):
+    def test_delete_diary_success(self):
         diary = Diary.objects.create(user=self.test_user, title='タイトル')
         response = self.client.post(reverse_lazy('diary:diary_delete', kwargs={'pk', diary.pk}))
         self.assertRedirects(response, reverse_lazy('diary:diary_list'))
